@@ -1,0 +1,1 @@
+{"status": "PREPARED", "roots": ["/home/operator/qwen38-5090/optimization-runs/exp043-split-attn-noautotune", "/home/operator/qwen38-5090/optimization-runs/pi-serving-044"], "reference_pid": 306, "cache_copy_bytes_per_root": 26093956, "protected_cache_unchanged": true}

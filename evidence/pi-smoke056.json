@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "provider": "gpu-host",
+  "model": "qwen3.8-27b-normal",
+  "contextWindow": 131072,
+  "requests": 2,
+  "toolRoundtrip": true,
+  "thinkingChars": 348,
+  "answer": "\n\n{\n  \"sum\": 42\n}",
+  "first": {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "thinking",
+        "thinking": "We need to answer user: \"Use add_numbers to calculate 17+25. After receiving its result, return final JSON with key sum.\"\n\nWe need call tool add_numbers with a=17 b=25. Then final JSON with key sum. Need likely output just JSON. Need ensure final JSON maybe {\"sum\": 42}. Let's call tool.\n",
+        "thinkingSignature": "reasoning_content"
+      },
+      {
+        "type": "text",
+        "text": "\n\n"
+      },
+      {
+        "type": "toolCall",
+        "id": "call_402a10e283a8434094e4295e",
+        "name": "add_numbers",
+        "arguments": {
+          "a": 17,
+          "b": 25
+        }
+      }
+    ],
+    "api": "openai-completions",
+    "provider": "gpu-host",
+    "model": "qwen3.8-27b-normal",
+    "usage": {
+      "input": 355,
+      "output": 119,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "totalTokens": 474,
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "total": 0
+      }
+    },
+    "stopReason": "toolUse",
+    "timestamp": 1788985976606,
+    "responseId": "698714efa6e14b03a311d095c3397fc0",
+    "rawStopReason": "tool_calls"
+  },
+  "second": {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "thinking",
+        "thinking": "Now return final JSON with key sum. Ensure valid JSON only.\n",
+        "thinkingSignature": "reasoning_content"
+      },
+      {
+        "type": "text",
+        "text": "\n\n{\n  \"sum\": 42\n}"
+      }
+    ],
+    "api": "openai-completions",
+    "provider": "gpu-host",
+    "model": "qwen3.8-27b-normal",
+    "usage": {
+      "input": 495,
+      "output": 28,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "totalTokens": 523,
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "total": 0
+      }
+    },
+    "stopReason": "stop",
+    "timestamp": 1788985977874,
+    "responseId": "deb9cd5f52f846338d3c7bb04f3cd241",
+    "rawStopReason": "stop"
+  }
+}

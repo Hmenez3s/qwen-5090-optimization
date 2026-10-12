@@ -1,0 +1,6 @@
+product True reasoning_chars 376
+gcd True reasoning_chars 308
+probability True reasoning_chars 604
+crt True reasoning_chars 530
+tool-roundtrip True
+ALL_FOCUSED_CHECKS_PASS

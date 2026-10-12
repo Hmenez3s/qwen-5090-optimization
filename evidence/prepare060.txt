@@ -1,0 +1,1 @@
+{"status": "PREPARED", "root": "/home/operator/qwen38-5090/optimization-runs/exp060-dspark", "draft": "/home/operator/qwen38-5090/models/Qwen3.8-27B-DSpark-NVFP4-eba1ac5", "algorithm": "DSPARK", "gamma": 7, "context": "131200", "pool": "131328", "mamba_slots": 8, "aot": 9, "cases": 3}

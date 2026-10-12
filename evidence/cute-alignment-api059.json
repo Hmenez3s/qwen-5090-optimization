@@ -1,0 +1,125 @@
+{
+  "root": "/home/operator/.venvs/qwen38/lib/python3.12/site-packages/nvidia_cutlass_dsl/dsl_packages/cutlass",
+  "hits": [
+    {
+      "path": "utils/tmem_allocator.py",
+      "line": 210,
+      "snippet": "            f\"Cannot allocate {num_cols} columns, only {self.remaining_cols} remaining\"\n        )\n\n        if self._current_offset == 0:\n            # First allocation - return base pointer with recast\n            ptr = cute.recast_ptr(self._base_ptr, dtype=dtype, loc=loc, ip=ip)\n        else:\n            # Subsequent allocations - offset from base\n            ptr = cute.recast_ptr(\n                self._base_ptr + self._current_offset,\n                dtype=dtype,\n                loc=loc,\n                ip=ip,\n            )\n\n        self._current_offset += num_cols\n        return ptr\n\n    @dsl_user_op"
+    },
+    {
+      "path": "utils/tmem_allocator.py",
+      "line": 213,
+      "snippet": "        if self._current_offset == 0:\n            # First allocation - return base pointer with recast\n            ptr = cute.recast_ptr(self._base_ptr, dtype=dtype, loc=loc, ip=ip)\n        else:\n            # Subsequent allocations - offset from base\n            ptr = cute.recast_ptr(\n                self._base_ptr + self._current_offset,\n                dtype=dtype,\n                loc=loc,\n                ip=ip,\n            )\n\n        self._current_offset += num_cols\n        return ptr\n\n    @dsl_user_op\n    def allocate_tensor(\n        self,\n        layout: cute.Layout,"
+    },
+    {
+      "path": "utils/smem_allocator.py",
+      "line": 353,
+      "snippet": "            element_width = size_or_type.width if size_or_type is not Boolean else 8\n            size_in_bytes = cute.ceil_div(element_width, 8)\n            base_ptr = self.allocate(\n                size_in_bytes, byte_alignment, partition=partition, loc=loc, ip=ip\n            )\n            return cute.recast_ptr(base_ptr, dtype=size_or_type, loc=loc, ip=ip)\n        else:\n            raise TypeError(\n                f\"Expected int, struct, or numeric type, but got {type(size_or_type)}\"\n            )\n\n        if cute.is_static(size_in_bytes) and size_in_bytes < 0:\n            raise ValueError(\"size must be non-negative\")\n\n        if byte_alignment < 1:\n            raise ValueError(\"`byte_alignment` must be at least 1\")\n\n        layout = cute.make_layout(size_in_bytes)\n        return self._smem_alloca("
+    },
+    {
+      "path": "utils/smem_allocator.py",
+      "line": 416,
+      "snippet": "            partition=partition,\n            loc=loc,\n            ip=ip,\n        )\n\n        return cute.recast_ptr(ptr, dtype=element_type, loc=loc, ip=ip)\n\n    @dsl_user_op\n    def allocate_tensor(\n        self,\n        element_type: Union[Type[Numeric],],\n        layout: Union[int, cute.Layout, cute.ComposedLayout],\n        byte_alignment: int = 1,\n        swizzle: Optional[cute.Swizzle] = None,\n        *,\n        partition: SmemPartition = SmemPartition.USER,\n        loc: Optional[ir.Location] = None,\n        ip: Optional[ir.InsertionPoint] = None,\n    ) -> cute.Tensor:"
+    },
+    {
+      "path": "utils/smem_allocator.py",
+      "line": 494,
+      "snippet": "\n        num_bytes = cosize_in_bits // 8\n        ptr = self.allocate(\n            num_bytes, byte_alignment, partition=partition, loc=loc, ip=ip\n        )\n        ptr = cute.recast_ptr(ptr, swizzle, dtype=element_type, loc=loc, ip=ip)\n        tensor = cute.make_tensor(ptr, layout, loc=loc, ip=ip)\n        return _Tensor(tensor, dtype=element_type, loc=loc, ip=ip)\n\n\n# Set explicit signature for Sphinx documentation to avoid issues with @dsl_user_op decorator\nSmemAllocator.__init__.__signature__ = inspect.Signature(  # type: ignore[attr-defined]\n    [\n        inspect.Parameter(\"self\", inspect.Parameter.POSITIONAL_OR_KEYWORD),\n    ]\n)\n\nget_smem_capacity_in_bytes = SmemAllocator.capacity_in_bytes\n"
+    },
+    {
+      "path": "cute/__init__.py",
+      "line": 72,
+      "snippet": "    make_ordered_layout,\n    make_layout_like,\n    make_composed_layout,\n    make_layout_tv,\n    make_swizzle,\n    recast_ptr,\n    get,\n    select,\n    front,\n    is_major,\n    leading_dim,\n    coalesce,\n    group_modes,\n    cosize,\n    dice,\n    prepend,\n    append,\n    prepend_ones,\n    append_ones,"
+    },
+    {
+      "path": "cute/__init__.py",
+      "line": 315,
+      "snippet": "    \"make_tensor\",\n    \"make_identity_tensor\",\n    \"make_fragment_like\",\n    \"make_rmem_tensor\",\n    \"make_rmem_tensor_like\",\n    \"recast_ptr\",\n    \"recast_tensor\",\n    # Tensor manipulation\n    \"get\",\n    \"select\",\n    \"front\",\n    \"is_major\",\n    \"leading_dim\",\n    \"find\",\n    \"find_if\",\n    \"transform_leaf\",\n    \"basis_value\",\n    \"basis_get\",\n    \"coalesce\","
+    },
+    {
+      "path": "cute/tensor.py",
+      "line": 86,
+      "snippet": "    select,\n    slice_,\n    crd2idx,\n    size,\n    leading_dim,\n    recast_ptr,\n    recast_layout,\n)\n\nfrom .tuple import transform_leaf, product, product_like, flatten_to_tuple\nfrom .arch import (\n    cvt_i8_bf16_intrinsic,\n    cvt_i4_bf16_intrinsic,\n)\n\n\n__all__ = [\n    \"TensorSSA\",\n    \"ReductionOp\","
+    },
+    {
+      "path": "cute/tensor.py",
+      "line": 1138,
+      "snippet": "    if src.element_type is Boolean:\n        src_width = 8\n    else:\n        src_width = src.element_type.width\n\n    src_iter = recast_ptr(src.iterator, dtype=dtype, loc=loc, ip=ip)\n    src_layout = recast_layout(dst_width, src_width, src.layout, loc=loc, ip=ip)\n    return type(src)(  # type: ignore[call-arg]\n        make_tensor(src_iter, src_layout, loc=loc, ip=ip), dtype=dtype, loc=loc, ip=ip\n    )\n\n\n@dsl_user_op\ndef domain_offset(\n    coord: Coord,\n    tensor: Tensor,\n    *,\n    loc: Optional[ir.Location] = None,\n    ip: Optional[ir.InsertionPoint] = None,"
+    },
+    {
+      "path": "cute/core.py",
+      "line": 149,
+      "snippet": "    \"idx2crd\",\n    \"increment_coord\",\n    \"recast_layout\",\n    \"slice_and_offset\",\n    \"shape\",\n    \"recast_ptr\",\n    \"make_ptr\",\n    \"composition\",\n    \"complement\",\n    \"right_inverse\",\n    \"left_inverse\",\n    \"logical_product\",\n    \"zipped_product\",\n    \"tiled_product\",\n    \"flat_product\",\n    \"raked_product\",\n    \"blocked_product\",\n    \"logical_divide\",\n    \"zipped_divide\","
+    },
+    {
+      "path": "cute/core.py",
+      "line": 4376,
+      "snippet": "# Pointer API\n#\n\n\n@dsl_user_op\ndef recast_ptr(\n    ptr: Pointer,\n    swizzle_: Optional[Swizzle] = None,\n    dtype: Optional[Type[Numeric]] = None,\n    loc: Optional[ir.Location] = None,\n    ip: Optional[ir.InsertionPoint] = None,\n) -> Pointer:\n    cvt_ty = None\n    if dtype is not None:\n        if cvt_ty is None:\n            if not isclass(dtype) or not issubclass(dtype, Numeric):\n                raise TypeError(f\"dtype must be a type of Numeric, but got {dtype}\")\n            cvt_ty = T.i8() if dtype is Boolean else dtype.mlir_type\n"
+    },
+    {
+      "path": "cute/core.py",
+      "line": 5671,
+      "snippet": "\n            :return: A pointer to the start of the memory range.\n            :raises AssertionError: If the size of the memory range is negative.\n            \"\"\"\n            assert self._size is not None and self._size >= 0\n            return recast_ptr(self._base, dtype=self._dtype, loc=loc, ip=ip)\n\n        @dsl_user_op\n        def get_tensor(\n            self,\n            layout: Union[Layout, ComposedLayout],\n            swizzle: Optional[Swizzle] = None,\n            dtype: Optional[Type[Numeric]] = None,\n            *,\n            loc: Optional[ir.Location] = None,\n            ip: Optional[ir.InsertionPoint] = None,\n        ) -> Tensor:\n            \"\"\"\n            Creates a tensor from the memory range."
+    },
+    {
+      "path": "cute/core.py",
+      "line": 5700,
+      "snippet": "            assert self._size is not None and self._size > 0\n            # make tensor\n            if isinstance(layout, ComposedLayout) and (swizzle is not None):\n                raise TypeError(\"incompatible layout with swizzle\")\n            elem_type = self._dtype if dtype is None else dtype\n            ptr = recast_ptr(self._base, swizzle, dtype=elem_type, loc=loc, ip=ip)\n            res = make_tensor(ptr, layout, loc=loc, ip=ip)\n            return type(res)(res, dtype=elem_type, loc=loc, ip=ip)\n\n        @dsl_user_op\n        def __getitem__(\n            self,\n            index: int,\n            *,\n            loc: Optional[ir.Location] = None,\n            ip: Optional[ir.InsertionPoint] = None,\n        ) -> Any:\n            \"\"\"\n            Returns the element at the specified index in the memory range."
+    },
+    {
+      "path": "cute/core.py",
+      "line": 6028,
+      "snippet": "        for name, off in self._offsets.items():\n            obj = self._annotations[name]\n            if isinstance(obj, struct._AlignMeta):\n                obj = obj.dtype\n            if struct._is_scalar_type(obj):\n                ptr = recast_ptr(base + off, dtype=obj, loc=loc, ip=ip)\n                new_obj: Any = struct._ScalarData(ptr)\n                object.__setattr__(cls, name, new_obj)\n            elif isinstance(obj, struct._MemRangeMeta):\n                new_obj = struct._MemRangeData(obj._dtype, obj._size, base + off)\n                object.__setattr__(cls, name, new_obj)\n            elif isinstance(obj, struct):\n                new_obj = obj(base + off)\n                object.__setattr__(cls, name, new_obj)\n            else:\n                raise TypeError(\n                    f\"Struct element only support struct/array/base_dsl scalar, \"\n                    f\"but got {obj}\"\n                )"
+    },
+    {
+      "path": "cute/core.py",
+      "line": 6230,
+      "snippet": "        for name, off in self._offsets.items():\n            obj = self._annotations[name]\n            if isinstance(obj, struct._AlignMeta):\n                obj = obj.dtype\n            if struct._is_scalar_type(obj):\n                ptr = recast_ptr(base + off, dtype=obj, loc=loc, ip=ip)\n                new_obj: Any = struct._ScalarData(ptr)\n                object.__setattr__(cls, name, new_obj)\n            elif isinstance(obj, struct._MemRangeMeta):\n                new_obj = struct._MemRangeData(obj._dtype, obj._size, base + off)\n                object.__setattr__(cls, name, new_obj)\n            elif isinstance(obj, struct):\n                new_obj = obj(base + off)\n                object.__setattr__(cls, name, new_obj)\n            else:\n                raise TypeError(\n                    f\"Union element only support struct/array/DSL scalar, \"\n                    f\"but got `{obj.__qualname__}`\"\n                )"
+    },
+    {
+      "path": "cute/arch/clc.py",
+      "line": 80,
+      "snippet": "    in canceled cluster.\n\n    :param result_addr: A pointer to the cluster launch control response address in SMEM\n    :type result_addr:  Pointer\n    \"\"\"\n    from cutlass.cute import recast_ptr, make_tensor, make_layout\n\n    clc_ptr_i128 = recast_ptr(result_addr, dtype=Int128, loc=loc, ip=ip)\n    clc_tensor = make_tensor(\n        clc_ptr_i128, make_layout(1, loc=loc, ip=ip), loc=loc, ip=ip\n    )\n\n    # Load the 128-bit value from shared memory\n    clc_result_vec = clc_tensor.load(loc=loc, ip=ip)\n\n    # Extract the i128 scalar from the vector<1xi128>\n    clc_result_i128 = vector.extract(\n        clc_result_vec.ir_value(loc=loc, ip=ip),\n        [],"
+    },
+    {
+      "path": "cute/arch/clc.py",
+      "line": 82,
+      "snippet": "    :param result_addr: A pointer to the cluster launch control response address in SMEM\n    :type result_addr:  Pointer\n    \"\"\"\n    from cutlass.cute import recast_ptr, make_tensor, make_layout\n\n    clc_ptr_i128 = recast_ptr(result_addr, dtype=Int128, loc=loc, ip=ip)\n    clc_tensor = make_tensor(\n        clc_ptr_i128, make_layout(1, loc=loc, ip=ip), loc=loc, ip=ip\n    )\n\n    # Load the 128-bit value from shared memory\n    clc_result_vec = clc_tensor.load(loc=loc, ip=ip)\n\n    # Extract the i128 scalar from the vector<1xi128>\n    clc_result_i128 = vector.extract(\n        clc_result_vec.ir_value(loc=loc, ip=ip),\n        [],\n        [0],\n    )"
+    },
+    {
+      "path": "cute/nvgpu/tcgen05/mma.py",
+      "line": 421,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand A, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n    def _verify_fragment_B(\n        self,\n        input: Tensor,\n        *,\n        loc: Optional[ir.Location] = None,\n        ip: Optional[ir.InsertionPoint] = None,\n    ) -> bool:\n        if input.memspace == AddressSpace.smem and isinstance(\n            input.layout.type, _cute_ir.ComposedLayoutType\n        ):"
+    },
+    {
+      "path": "cute/nvgpu/tcgen05/mma.py",
+      "line": 439,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand B, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n\nclass Sm100MmaTraits(Trait):\n    admissible_fields = [\n        Field.ACCUMULATE,\n        Field.NEGATE_A,\n        Field.NEGATE_B,\n        Field.DISABLE_OUTPUT_LANE,\n    ]\n\n    def set("
+    },
+    {
+      "path": "cute/nvgpu/tcgen05/mma.py",
+      "line": 640,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand A, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n    def _verify_fragment_B(\n        self,\n        input: Tensor,\n        *,\n        loc: Optional[ir.Location] = None,\n        ip: Optional[ir.InsertionPoint] = None,\n    ) -> bool:\n        if input.memspace == AddressSpace.smem and isinstance(\n            input.layout.type, _cute_ir.ComposedLayoutType\n        ):"
+    },
+    {
+      "path": "cute/nvgpu/tcgen05/mma.py",
+      "line": 658,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand B, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n\nclass BlockScaledMmaTraits(Trait):\n    admissible_fields = [\n        Field.ACCUMULATE,\n        Field.NEGATE_A,\n        Field.NEGATE_B,\n        Field.SFA,\n        Field.SFB,\n    ]\n"
+    },
+    {
+      "path": "cute/nvgpu/warpgroup/mma.py",
+      "line": 241,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand A, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n    def _verify_fragment_B(\n        self,\n        input: Tensor,\n        *,\n        loc: Optional[ir.Location] = None,\n        ip: Optional[ir.InsertionPoint] = None,\n    ) -> bool:\n        if input.memspace == AddressSpace.smem and isinstance(\n            input.layout.type, _cute_ir.ComposedLayoutType\n        ):"
+    },
+    {
+      "path": "cute/nvgpu/warpgroup/mma.py",
+      "line": 259,
+      "snippet": "        ):\n            raise OpError(\n                self,\n                f\"Expected affine layout for {self._make_trait()}'s operand B, \"\n                f\"but got composed layout instead: {input.layout}\"\n                f\"\\nPlease use recast_ptr(ptr, {input.layout.inner}, element_type) operation to move swizzle to the ptr\",\n            )\n        return True\n\n\nclass MmaTraits(Trait):\n    admissible_fields = [Field.ACCUMULATE]\n\n    def _normalize_field_name(self, field: Any) -> str:\n        \"\"\"\n        Normalize a field specifier (enum or string) into the IR logical field name.\n        Accepted inputs:\n          - Field.ACCUMULATE\n          - \"accum_c\""
+    },
+    {
+      "path": "_mlir/dialects/_cute_ops_gen.py",
+      "line": 5244,
+      "snippet": "  return RandomDelayOp(loc=loc, ip=ip)\n\n@_ods_cext.register_operation(_Dialect)\nclass RecastIterOp(_ods_ir.OpView):\n  r\"\"\"\n  This `cute.recast_iter` is similar to CuTe C++'s recast_ptr, convert two iterators\n  in certain aspects like type/swizzle for convenience.\n  But this operation has some usage limitation for correctness,\n  like it's not allowed for TMA tensor's iterator and it's not allowed to convert align attribute.\n  In general, it's not allowed to convert two different iterator kinds (PtrType <-> IntTupleType)\n  \n  Example:\n  \n  ```mlir\n    %ptr = cute.recast_iter(%0) : !cute.ptr<f16, smem, align<128>, S<3,4,3>>\n        to !cute.ptr<f32, smem, align<128>, S<2,4,3>>\n  ```\n  \"\"\"\n"
+    }
+  ]
+}

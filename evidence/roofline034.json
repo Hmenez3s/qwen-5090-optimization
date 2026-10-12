@@ -1,0 +1,25 @@
+{
+  "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+  "nominal_bandwidth_GB_per_s": 1792,
+  "claim": "NVIDIA reference specification, not measured bandwidth on gpu-host",
+  "formulas": [
+    {
+      "k": 17408,
+      "n": 5120,
+      "weight_and_sf_bytes": 50135040,
+      "optimistic_one_DRAM_read_us": 27.977142857142855
+    },
+    {
+      "k": 5120,
+      "n": 34816,
+      "weight_and_sf_bytes": 100270080,
+      "optimistic_one_DRAM_read_us": 55.95428571428571
+    },
+    {
+      "k": 5120,
+      "n": 248320,
+      "weight_and_sf_bytes": 715161600,
+      "optimistic_one_DRAM_read_us": 399.0857142857143
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"status": "PREPARED", "roots": ["/home/operator/qwen38-5090/optimization-runs/exp045-split-triton", "/home/operator/qwen38-5090/optimization-runs/pi-serving-046"], "reference_pid": 1266, "cache_copy_bytes_per_root": 26093956, "protected_cache_unchanged": true}

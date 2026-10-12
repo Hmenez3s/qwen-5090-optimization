@@ -1,0 +1,2 @@
+{"root": "exp048-kda2", "suite": "quality-needles", "exit": 0, "stderr": ""}
+{"status": "PASS", "root": "exp048-kda2", "suite": "quality-needles", "cases": 3}

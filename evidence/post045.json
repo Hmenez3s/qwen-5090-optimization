@@ -1,0 +1,1 @@
+{"status": "PASS", "performance_cases": 27, "quality_expected_failure": "probability", "protected_cache_unchanged": true, "protected_sources_unchanged": true, "stopped_pid": 1660, "gpu_free_MiB": 29850.0, "power_limit_W": 460.0}

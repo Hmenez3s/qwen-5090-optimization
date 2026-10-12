@@ -1,0 +1,4 @@
+CORPUS_EXIT 0 {"cases": 9, "needle_cases": 3, "filler_tokens": 374452}
+ [transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (374452 > 262144). Running this sequence through the model will result in indexing errors
+
+{"root": "/home/operator/qwen38-5090/optimization-runs/exp008-dflash8", "wait_for": {"pid": 384, "start_ticks": "9375", "boot_id": "55e45f80-59e4-4725-bf8f-af4d60b3f181"}, "port": 34731}

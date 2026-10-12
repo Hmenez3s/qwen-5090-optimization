@@ -1,0 +1,10 @@
+{
+  "status": "ready",
+  "served_model_name": "qwen3.8-27b-normal",
+  "context_length": 131200,
+  "max_total_num_tokens": 131328,
+  "attention_backend": "flashinfer",
+  "decode_attention_backend": null,
+  "speculative_attention_mode": "prefill",
+  "speculative_dflash_block_size": 8
+}

@@ -1,0 +1,26 @@
+{
+  "numerical_count": 27,
+  "bitwise_min": 1.0,
+  "timing_us_median_of_seed_medians": {
+    "('l2_cold', 'reference_cutlass_cache_matched')": 451.80800557136536,
+    "('l2_cold', 'b12x_stock_64x64_no_prefetch')": 552.1600246429443,
+    "('l2_cold', 'b12x_stock_64x64_prefetch')": 552.1600246429443,
+    "('l2_cold', 'b12x_stock_64x128_no_prefetch')": 455.9360146522522,
+    "('l2_cold', 'b12x_stock_64x128_prefetch')": 457.8239917755127,
+    "('l2_cold', 'b12x_stock_128x64_no_prefetch')": 1015.0079727172852,
+    "('l2_cold', 'b12x_stock_128x64_prefetch')": 1015.0079727172852,
+    "('l2_cold', 'b12x_stock_128x128_no_prefetch')": 576.6880214214325,
+    "('l2_cold', 'b12x_stock_128x128_prefetch')": 576.7359733581543,
+    "('l2_cold', 'kda_lm_head_private')": 441.8400079011917,
+    "('reuse', 'reference_cutlass_cache_matched')": 414.94399309158325,
+    "('reuse', 'b12x_stock_64x64_no_prefetch')": 545.6960201263428,
+    "('reuse', 'b12x_stock_64x64_prefetch')": 545.5359816551208,
+    "('reuse', 'b12x_stock_64x128_no_prefetch')": 414.97600078582764,
+    "('reuse', 'b12x_stock_64x128_prefetch')": 414.97600078582764,
+    "('reuse', 'b12x_stock_128x64_no_prefetch')": 1013.9679908752441,
+    "('reuse', 'b12x_stock_128x64_prefetch')": 1012.9599571228027,
+    "('reuse', 'b12x_stock_128x128_no_prefetch')": 568.5439705848694,
+    "('reuse', 'b12x_stock_128x128_prefetch')": 568.5439705848694,
+    "('reuse', 'kda_lm_head_private')": 410.8479917049408
+  }
+}

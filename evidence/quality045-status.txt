@@ -1,0 +1,3 @@
+product True reasoning_chars 338
+gcd True reasoning_chars 1049
+probability False reasoning_chars 677

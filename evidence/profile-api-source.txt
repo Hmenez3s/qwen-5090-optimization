@@ -1,0 +1,28 @@
+io_struct.py ProfileReq 2110 
+class ProfileReq(BaseReq, kw_only=True):
+    req_type: ProfileReqType = ProfileReqType.START_PROFILE
+    # The output directory
+    output_dir: Optional[str] = None
+    # Specify the steps to start the profiling
+    start_step: Optional[int] = None
+    # If set, it profile as many as this number of steps.
+    # If it is set, profiling is automatically stopped after this step, and
+    # the caller doesn't need to run stop_profile.
+    num_steps: Optional[int] = None
+    # The activities to record. The choices are ["CPU", "GPU", "MEM", "RPD"]
+    activities: Optional[List[str]] = None
+    # Whether profile by stages (e.g., prefill and decode) separately
+    profile_by_stage: bool = False
+    # Whether to record source information (file and line number) for the ops.
+    with_stack: Optional[bool] = None
+    # Whether to save information about operator’s input shapes.
+    record_shapes: Optional[bool] = None
+    profile_id: Optional[str] = None
+    # Merge profiles from all ranks into a single trace
+    merge_profiles: bool = False
+    # The prefix of the profile filenames
+    profile_prefix: Optional[str] = None
+    # Only profile these stages and ignore others
+    profile_stages: Optional[List[str]] = None
+    # Add iteration-level annotations (KV / request aggregates) for roofline-style analysis
+    detailed_annotations: bool = False

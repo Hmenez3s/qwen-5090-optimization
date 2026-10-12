@@ -1,0 +1,2 @@
+{"root": "exp050-control-after", "suite": "performance", "exit": 0, "stderr": ""}
+{"status": "PASS", "root": "exp050-control-after", "suite": "performance", "cases": 27}

@@ -1,0 +1,42 @@
+{
+  "boot": "e0fb7794-5bd9-4948-a8b8-7c699a1f80f9",
+  "pid": 384,
+  "same_identity": true,
+  "tools": {
+    "ncu": null,
+    "nsys": null,
+    "nvcc": null,
+    "perf": null
+  },
+  "/usr/local": [
+    "games",
+    "man",
+    "sbin",
+    "share",
+    "etc",
+    "lib",
+    "include",
+    "src",
+    "bin"
+  ],
+  "/home/operator/.venvs/qwen38/lib/python3.12/site-packages/nvidia": [
+    "nvshmem",
+    "cu13",
+    "cusparselt",
+    "cudnn",
+    "mathdx",
+    "nccl"
+  ],
+  "gpu": "NVIDIA GeForce RTX 5090, 610.88, 29403 MiB, 2785 MiB, 315 MHz, 7001 MHz, 40.94 W, 460.00 W, 36\n",
+  "status": "ready",
+  "model": "qwen3.8-27b-normal",
+  "context_length": 131200,
+  "max_total_tokens": 131328,
+  "environment_paths": {
+    "TMPDIR": "/tmp/qwen-pi-serving-032/tmp",
+    "FLASHINFER_WORKSPACE_BASE": "/home/operator/qwen38-5090/optimization-runs/pi-serving-032/home",
+    "CUDA_HOME": "/home/operator/.venvs/qwen38/lib/python3.12/site-packages/nvidia/cu13",
+    "CUTE_DSL_CACHE_DIR": "/home/operator/qwen38-5090/optimization-runs/pi-serving-032/cute-cache",
+    "CUTE_DSL_DUMP_DIR": "/home/operator/qwen38-5090/optimization-runs/pi-serving-032/cute-dumps"
+  }
+}

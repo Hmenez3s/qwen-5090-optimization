@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+/windows/qwenctl/dist/
+.pi/
+.env
+.env.*

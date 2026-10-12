@@ -1,0 +1,32 @@
+{
+  "numerical_count": 33,
+  "bitwise_min": 1.0,
+  "timings": {
+    "(17408, 5120, 'l2_cold', 'reference_cutlass_cache_matched')": 42.24000126123428,
+    "(17408, 5120, 'l2_cold', 'b12x_stock_64x128_no_prefetch')": 52.46400088071823,
+    "(17408, 5120, 'l2_cold', 'b12x_swap_64x16_no_prefetch')": 134.36800241470337,
+    "(17408, 5120, 'l2_cold', 'b12x_swap_64x16_prefetch')": 134.36800241470337,
+    "(17408, 5120, 'l2_cold', 'b12x_swap_64x32_no_prefetch')": 83.16799998283386,
+    "(17408, 5120, 'l2_cold', 'b12x_swap_64x32_prefetch')": 83.16799998283386,
+    "(17408, 5120, 'l2_cold', 'kda_down')": 38.11199963092804,
+    "(17408, 5120, 'reuse', 'reference_cutlass_cache_matched')": 21.95199951529503,
+    "(17408, 5120, 'reuse', 'b12x_stock_64x128_no_prefetch')": 29.920000582933426,
+    "(17408, 5120, 'reuse', 'b12x_swap_64x16_no_prefetch')": 132.32000172138214,
+    "(17408, 5120, 'reuse', 'b12x_swap_64x16_prefetch')": 132.32000172138214,
+    "(17408, 5120, 'reuse', 'b12x_swap_64x32_no_prefetch')": 81.11999928951263,
+    "(17408, 5120, 'reuse', 'b12x_swap_64x32_prefetch')": 81.11999928951263,
+    "(17408, 5120, 'reuse', 'kda_down')": 19.519999623298645,
+    "(5120, 34816, 'l2_cold', 'reference_cutlass_cache_matched')": 68.7360018491745,
+    "(5120, 34816, 'l2_cold', 'b12x_stock_64x128_no_prefetch')": 68.83200258016586,
+    "(5120, 34816, 'l2_cold', 'b12x_swap_64x16_no_prefetch')": 273.6319899559021,
+    "(5120, 34816, 'l2_cold', 'b12x_swap_64x16_prefetch')": 273.6639976501465,
+    "(5120, 34816, 'l2_cold', 'b12x_swap_64x32_no_prefetch')": 150.751993060112,
+    "(5120, 34816, 'l2_cold', 'b12x_swap_64x32_prefetch')": 150.751993060112,
+    "(5120, 34816, 'reuse', 'reference_cutlass_cache_matched')": 36.0959991812706,
+    "(5120, 34816, 'reuse', 'b12x_stock_64x128_no_prefetch')": 52.44800075888634,
+    "(5120, 34816, 'reuse', 'b12x_swap_64x16_no_prefetch')": 273.1519937515259,
+    "(5120, 34816, 'reuse', 'b12x_swap_64x16_prefetch')": 271.61601185798645,
+    "(5120, 34816, 'reuse', 'b12x_swap_64x32_no_prefetch')": 148.41599762439728,
+    "(5120, 34816, 'reuse', 'b12x_swap_64x32_prefetch')": 146.65600657463074
+  }
+}

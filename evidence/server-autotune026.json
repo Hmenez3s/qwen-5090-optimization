@@ -1,0 +1,317 @@
+{
+  "_metadata": {
+    "flashinfer_version": "0.6.18",
+    "cuda_version": "13.0",
+    "cublas_version": "13.1.1",
+    "cudnn_version": "92000",
+    "cudnn_frontend_version": "1.28.0",
+    "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((1, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((1, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((1, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          10
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((1, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((1, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((2, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      [
+        [
+          12,
+          0
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((2, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          10
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((2, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      [
+        [
+          12,
+          0
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((2, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((2, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((4, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      [
+        [
+          12,
+          0
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((4, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          10
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((4, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((4, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          11
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((4, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((8, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((8, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((8, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          3
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((8, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      10,
+      [
+        [
+          12,
+          11
+        ]
+      ]
+    ]
+  ],
+  "('fp4_gemm', 'CudnnFp4GemmRunner', ((8, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), (torch.bfloat16, 16, True, True))": [
+    "CudnnFp4GemmRunner",
+    [
+      0,
+      []
+    ]
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((1, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    0
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((1, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    6
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((1, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    6
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((1, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    0
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((1, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    0
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((16, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    14
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((16, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    17
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((16, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    2
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((16, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    12
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((2, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((2, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    18
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((2, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((2, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((2, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((4, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((4, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    20
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((4, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    6
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((4, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((4, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((8, 2560), (2560, 14336), (-1, 320), (320, 14336), (), (0,), (-1, 14336), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    6
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((8, 2560), (2560, 16384), (-1, 320), (320, 16384), (), (0,), (-1, 16384), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((8, 2560), (2560, 34816), (-1, 320), (320, 34816), (), (0,), (-1, 34816), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    2
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((8, 3072), (3072, 5120), (-1, 384), (384, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "('fp4_gemm', 'CutlassFp4GemmRunner', ((8, 8704), (8704, 5120), (-1, 1088), (1088, 5120), (), (0,), (-1, 5120), (0,), (0,), (-1,)), ())": [
+    "CutlassFp4GemmRunner",
+    4
+  ],
+  "_generation": "97ecbf81c844b98c53a1c0c6c101b447c819da5e4c62b5ed23fd754699812895"
+}

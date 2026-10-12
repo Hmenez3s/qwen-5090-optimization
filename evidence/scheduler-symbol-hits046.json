@@ -1,0 +1,7 @@
+{
+  "num_continuous_decode_steps": [],
+  "stream_interval": [
+    "managers/scheduler.py",
+    "managers/scheduler_components/output_streamer.py"
+  ]
+}

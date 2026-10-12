@@ -1,0 +1,17 @@
+quality-final 0  
+quality-needles 1  benchmark failed: --url ports 8081 and 8002 are forbidden
+
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/operator/qwen38-5090/optimization-runs/pi-serving-053/run-final053.py", line 13, in <module>
+    out=r/'results'/(suite+'.jsonl');cmd=['/usr/bin/python3',str(r/'benchmark_stream.py'),'--protocol','openai','--url','http://127.0.0.1:8081','--expected-model',model,'--manifest',str(r/'cases'/(suite+'.json')),'--output',str(out)];call(suite,cmd,1200);rows=[json.loads(x) for x in out.read_text().splitlines()];cases=[x for x in rows if x.get('record_type')=='case'];assert len(cases)==expected and all(x.get('status')=='ok' for x in cases)
+                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/operator/qwen38-5090/optimization-runs/pi-serving-053/run-final053.py", line 9, in call
+    q=subprocess.run(cmd,cwd=r,env=env,capture_output=True,text=True,timeout=timeout);status['steps'].append({'name':name,'exit':q.returncode,'stdout':q.stdout,'stderr':q.stderr});print(name,q.returncode,q.stdout,q.stderr,flush=True);q.check_returncode()
+                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 502, in check_returncode
+    raise CalledProcessError(self.returncode, self.args, self.stdout,
+subprocess.CalledProcessError: Command '['/usr/bin/python3', '/home/operator/qwen38-5090/optimization-runs/pi-serving-053/benchmark_stream.py', '--protocol', 'openai', '--url', 'http://127.0.0.1:8081', '--expected-model', 'qwen3.8-27b-normal', '--manifest', '/home/operator/qwen38-5090/optimization-runs/pi-serving-053/cases/quality-needles.json', '--output', '/home/operator/qwen38-5090/optimization-runs/pi-serving-053/results/quality-needles.jsonl']' returned non-zero exit status 1.

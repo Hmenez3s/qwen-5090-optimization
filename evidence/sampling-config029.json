@@ -1,0 +1,9 @@
+{
+  "speculative_algorithm": "DFLASH",
+  "speculative_accept_threshold_single": 1.0,
+  "speculative_accept_threshold_acc": 1.0,
+  "speculative_use_rejection_sampling": false,
+  "sampling_defaults": "model",
+  "preferred_sampling_params": null,
+  "speculative_dflash_block_size": 8
+}

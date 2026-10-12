@@ -1,0 +1,68 @@
+## Scout Report: SM120 b12x Specialization Entrypoints
+**Mission**: Identify callable b12x paths beyond stock tactics—`swap_ab`/narrow-N, `cpasync`, and split-K—with exact contracts and cache ownership.  
+**Status**: COMPLETE  
+**Searched Scope**: `evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py`, `gemm_base.py:6200-6885`, `gemm_mm_fp4_cute_dsl.py:44-239`
+
+### Executive Summary
+
+The public `mm_fp4(..., backend="b12x")` runner exposes only six-field tactics: `(tile, (1,1), swap_ab, use_prefetch, "sm120", None)`. It always constructs `DenseGemmKernel` with default `load_path="tma"` and `split_k_slices=1`; `cpasync`, split-K, atomic reduction, and non-TMA flags require direct kernel construction/compilation. `swap_ab` is callable through the runner when manually supplying a tactic, but the runner’s stock enumeration only adds it for a default narrow-N plan.
+
+### Callable Interfaces / Contracts
+
+**Kernel constructor** — `DenseGemmKernel(...)` / exported alias `Sm120B12xBlockScaledDenseGemmKernel`:
+
+```text
+(sf_vec_size, mma_tiler_mn, cluster_shape_mn,
+ mma_k=64, tile_k=None, single_work_tile_per_cta=False,
+ use_prefetch=False, enable_pdl=True,
+ direct_one_m_tile_scheduler=False,
+ split_k_slices=1, split_k_atomic_bf16=False,
+ use_m1_non_tma_a=False, use_m1_non_tma_c=False,
+ use_m1_non_tma_sfa=False,
+ load_path="tma", swap_ab=False)
+```
+
+`load_path` is `"tma"` or `"cpasync"`; `swap_ab` changes the internal MMA orientation while the epilogue preserves logical `C[m,n]`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:214-260】【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:1599-1644】.
+
+The compiled wrapper signature is:
+
+```text
+wrapper(mA, mB, mC, sf_m, sf_n, sf_k, l,
+        a_sf_ptr, b_sf_ptr, alpha_tensor,
+        max_active_clusters, current_stream,
+        swap_ab=False, epilogue_op=lambda x:x)
+```
+
+It expects logical A `(m,k,l)`, B `(n,k,l)`, and row-major C `(m,n,l)`. Uint8 A/B are recast as FP4 with `k = packed_k * 2`; scale pointers use the 128x4 layout `(32,4,sf_m,4,sf_k,l)` with order `(2,1,4,0,3,5)`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2532-2609】. Alpha must be a one-element FP32 tensor; launch preparation converts scalar alpha to `[1]` and caches the device `[1.0]` default【evidence/installed/flashinfer/gemm/gemm_mm_fp4_cute_dsl.py:246-260】. The kernel multiplies in FP32 before output conversion【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:911-913】.
+
+Public `mm_fp4` supplies A `(m,k/2)`, B `(n,k/2)` after caller’s public `(k,n)` B is transposed; it passes `a_descale` and `b_descale.T`, and output is row-major `(m,n)` BF16/FP16【evidence/installed/flashinfer/gemm/gemm_base.py:6790-6881】【evidence/installed/flashinfer/gemm/gemm_base.py:7097-7117】.
+
+### Option Flow
+
+- **Runner-flowing:** tile, `swap_ab`, `use_prefetch`, PDL, output dtype, NVFP4/MXFP4 scale-vector choice.
+- **Not runner-flowing:** `load_path`, `split_k_slices`, `split_k_atomic_bf16`, `tile_k`, `mma_k`, and `use_m1_non_tma_*`; these are absent from the runner tactic and constructor call【evidence/installed/flashinfer/gemm/gemm_base.py:6796-6849】.
+- **cpasync:** direct-only. `can_implement` permits it only for `sf_vec_size=16` and `l=1`; it uses direct global tensors plus `cp_async_commit_group/wait_group`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2466-2488】【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:1973-2055】【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2238-2240】.
+- **swap/narrow-N:** FP4 only, `l=1`; tile N `<64` additionally requires `swap_ab=True`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2478-2504】. The runner’s default selector chooses `(64,32)` plus swap only when `m==1`, `n<=512`, and `k>=4096`; for the requested M=8 wide-N shapes it selects `(64,128)`, no swap【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2612-2709】.
+- **split-K:** direct-only. `split_k_slices>1` sets grid `(1,S,num_ctas_n)` and partitions K using integer floor division【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2390-2407】【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:1209-1214】. Non-atomic mode writes partials to `C[m,n,split_idx]`; atomic mode BF16-adds into logical `C[m,n,0]`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:1728-1860】. `can_implement` does not validate split divisibility, C initialization, or atomic dtype; it nevertheless permits Float16/Float32, so those are runtime-contract gaps. Swap+split is not grounded: its swap epilogue writes `tile_coord_mnl[2]`, not `split_idx`【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:1599-1644】.
+
+### Supported Candidate Set for Requested Shapes
+
+For NVFP4 (`sf_vec_size=16`), both requested shapes satisfy K%32==0. The runner can enumerate:
+
+```text
+(64,64), (64,128), (128,64), (128,128)
+```
+
+each with `use_prefetch=False/True`; the default for both M=8, N=5120/34816 is `(64,128), swap_ab=False`【evidence/installed/flashinfer/gemm/gemm_base.py:6745-6787】【evidence/installed/flashinfer/gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py:2655-2679】. Direct narrow candidate `(64,32), swap_ab=True` passes the static tile rules, but is not selected for these wide-N shapes. With default `tile_k=128`, K tile counts are 136 and 40; S={2,4,8} divides both, but this is arithmetic compatibility, not a source-declared split-K tactic.
+
+### Cache Ownership / Key
+
+`_B12X_MM_FP4_KERNEL_CACHE` is owned by the b12x runner【evidence/installed/flashinfer/gemm/gemm_base.py:6684-6687】. `_compile_block_scaled_gemm` transforms the caller key to:
+
+```text
+mem_key = (device_index, cache_key)
+```
+
+using current CUDA device when unspecified, then stores `(compiled_gemm,max_active_clusters)` under that key【evidence/installed/flashinfer/gemm/gemm_mm_fp4_cute_dsl.py:44-82】【evidence/installed/flashinfer/gemm/gemm_mm_fp4_cute_dsl.py:117-119】. The runner key includes scale vector, tile, cluster, swap, prefetch, kernel type, TMA-store slot, PDL, and output dtype—but not `load_path`, split-K, `tile_k`, or atomic mode【evidence/installed/flashinfer/gemm/gemm_base.py:6817-6829】. Direct callers therefore need a distinct owner/key containing every constructor-static option.
+
+**Can-implement is static eligibility only; no runtime or numerical proof is present here.**

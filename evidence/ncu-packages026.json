@@ -1,0 +1,141 @@
+{
+  "source": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/Packages.gz",
+  "packages": [
+    {
+      "Package": "nsight-compute-2024.2.1",
+      "Version": "2024.2.1.2-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2024.2.1_2024.2.1.2-1_amd64.deb",
+      "Size": "431497410",
+      "SHA256": "e4658caf3cb91ee225d53b2289e2dd4e7a395a831b0497c3b323a99219b39006"
+    },
+    {
+      "Package": "nsight-compute-2024.3.0",
+      "Version": "2024.3.0.15-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2024.3.0_2024.3.0.15-1_amd64.deb",
+      "Size": "425073102",
+      "SHA256": "c7447e4846be91cd4f4b1fe29adbaca85f143fa8735f0d39b3a1ccc2cf926259"
+    },
+    {
+      "Package": "nsight-compute-2024.3.1",
+      "Version": "2024.3.1.2-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2024.3.1_2024.3.1.2-1_amd64.deb",
+      "Size": "424962330",
+      "SHA256": "d2fb98a9731df7cde39974f896b3ecd3f2d0dd7a058de4324d36818105a99d80"
+    },
+    {
+      "Package": "nsight-compute-2024.3.2",
+      "Version": "2024.3.2.3-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2024.3.2_2024.3.2.3-1_amd64.deb",
+      "Size": "425139806",
+      "SHA256": "55be38ea4f345a7a81486232e315f2a81c206d9b8d36371b5cd38ce27ee97c16"
+    },
+    {
+      "Package": "nsight-compute-2025.1.0",
+      "Version": "2025.1.0.14-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.1.0_2025.1.0.14-1_amd64.deb",
+      "Size": "294593890",
+      "SHA256": "52d22adca7f3434524dd27695719f88ca665efae6c5765f5199c810084bbc454"
+    },
+    {
+      "Package": "nsight-compute-2025.1.1",
+      "Version": "2025.1.1.2-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.1.1_2025.1.1.2-1_amd64.deb",
+      "Size": "294787454",
+      "SHA256": "d386c53f5452ddfaec8de3d7240eba1e0d8ffb690aae6585c77d60199e9b2b05"
+    },
+    {
+      "Package": "nsight-compute-2025.2.0",
+      "Version": "2025.2.0.11-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.2.0_2025.2.0.11-1_amd64.deb",
+      "Size": "296174894",
+      "SHA256": "e6846e7062a9885d9d351b8a4ff8831eebde843e01963e12ebe1e3532eb70e35"
+    },
+    {
+      "Package": "nsight-compute-2025.2.1",
+      "Version": "2025.2.1.3-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.2.1_2025.2.1.3-1_amd64.deb",
+      "Size": "296189558",
+      "SHA256": "afa4b2b354f93fcbefbb6c0ab7a83223d7f9d6852d8b8868253757562049fc8d"
+    },
+    {
+      "Package": "nsight-compute-2025.3.0",
+      "Version": "2025.3.0.19-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.3.0_2025.3.0.19-1_amd64.deb",
+      "Size": "313179982",
+      "SHA256": "08f94cd696e48b107583aadf34bc4a74b0f0c2666e0ab6638fda3dba9ad80f3b"
+    },
+    {
+      "Package": "nsight-compute-2025.3.1",
+      "Version": "2025.3.1.4-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.3.1_2025.3.1.4-1_amd64.deb",
+      "Size": "314475378",
+      "SHA256": "e2d393e1a0ba7ae1c983b1062f6494a8e85a98c987503f71bb73cc615aafe512"
+    },
+    {
+      "Package": "nsight-compute-2025.4.0",
+      "Version": "2025.4.0.12-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.4.0_2025.4.0.12-1_amd64.deb",
+      "Size": "322436338",
+      "SHA256": "79b6372db63fd5f4224d3e6eabed150fdee0ea7d22afe6a8323f6fa7f94afda0"
+    },
+    {
+      "Package": "nsight-compute-2025.4.1",
+      "Version": "2025.4.1.2-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2025.4.1_2025.4.1.2-1_amd64.deb",
+      "Size": "322492682",
+      "SHA256": "39016047b0dabd1c11e40f51a275223acd8e761ed299beb348b2a09ee8eccfaf"
+    },
+    {
+      "Package": "nsight-compute-2026.1.0",
+      "Version": "2026.1.0.9-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2026.1.0_2026.1.0.9-1_amd64.deb",
+      "Size": "329871126",
+      "SHA256": "2ee12bd03fa137cb44e894743feaa92256b925d91394756a29f3a3f80992dfa4"
+    },
+    {
+      "Package": "nsight-compute-2026.1.1",
+      "Version": "2026.1.1.2-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2026.1.1_2026.1.1.2-1_amd64.deb",
+      "Size": "329884926",
+      "SHA256": "f1ead828efaf27835dd6fbbc2d9f2f058f99490ba034e1f4a037a3ed0188be00"
+    },
+    {
+      "Package": "nsight-compute-2026.2.0",
+      "Version": "2026.2.0.7-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2026.2.0_2026.2.0.7-1_amd64.deb",
+      "Size": "345053582",
+      "SHA256": "24d052b70aae1e8a0a132b45d0cc36fd88211ef2eb210c9c2c198407bb53037a"
+    },
+    {
+      "Package": "nsight-compute-2026.2.1",
+      "Version": "2026.2.1.5-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2026.2.1_2026.2.1.5-1_amd64.deb",
+      "Size": "345070298",
+      "SHA256": "6829651ceeb0c3f65890b9f727b74d1e550fed58c454e11c2c87442295e4eb70"
+    },
+    {
+      "Package": "nsight-compute-2026.3.0",
+      "Version": "2026.3.0.13-1",
+      "Architecture": "amd64",
+      "Filename": "./nsight-compute-2026.3.0_2026.3.0.13-1_amd64.deb",
+      "Size": "389799310",
+      "SHA256": "84feeebbe340239f3d33a9900279cacbb33a6ceb8780f65897574e0c2add9564"
+    }
+  ]
+}

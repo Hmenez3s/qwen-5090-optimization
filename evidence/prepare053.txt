@@ -1,0 +1,1 @@
+{"status": "PREPARED", "root": "/home/operator/qwen38-5090/optimization-runs/pi-serving-053", "wait_for_pid": 3471, "protected_cache_unchanged": true, "aot_libraries": 9}

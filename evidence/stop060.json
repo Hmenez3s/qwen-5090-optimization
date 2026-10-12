@@ -1,0 +1,1 @@
+{"status": "STOPPED", "pid": 7460, "signal": "SIGTERM", "metrics": {"sglang:num_running_reqs": 0.0, "sglang:num_queue_reqs": 0.0}}

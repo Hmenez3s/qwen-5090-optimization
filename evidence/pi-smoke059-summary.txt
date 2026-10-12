@@ -1,0 +1,1 @@
+{"status":"PASS","provider":"gpu-host","model":"qwen3.8-27b-normal","contextWindow":131072,"requests":2,"toolRoundtrip":true,"thinkingChars":285,"answer":"\n\n{\"sum\":42}"}

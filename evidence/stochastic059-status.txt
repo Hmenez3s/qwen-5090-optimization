@@ -1,0 +1,1 @@
+{"status": "PASS", "seeds": 3, "output": "/home/operator/qwen38-5090/optimization-runs/pi-serving-059/results/stochastic-quality.jsonl"}

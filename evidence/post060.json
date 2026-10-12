@@ -1,0 +1,1 @@
+{"status": "PASS", "pid": 7460, "metrics": {"sglang:num_running_reqs": 0.0, "sglang:num_queue_reqs": 0.0, "sglang:spec_accept_length": 1.525, "sglang:spec_accept_rate": 0.075, "sglang:spec_block_accept_length": 0.0, "sglang:spec_num_draft_tokens": 8.0}, "gpu": "31232, 956, 460.00", "performance_lines": 28, "needles_lines": 4, "quality_lines": 6}

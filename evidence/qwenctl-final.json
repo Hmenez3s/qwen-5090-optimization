@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "commit": "1e3c4df93b97c94b5cf1b8a6674cc8b452d24d34",
+  "repo": "windows/qwenctl",
+  "visibility": "PRIVATE",
+  "installed_exe_sha256": "0331c0585642e8b16ddb8e7c77c482c8693b143ef963465df3f68b126184b051",
+  "active_root": "/home/operator/qwen38-5090/optimization-runs/qwenctl-20260910T012754Z-a3c64c11",
+  "linux_pid": 6820,
+  "controller_pid": 37328,
+  "controller_alive": true,
+  "profile": "VALIDATED",
+  "health_code": "HEALTHY",
+  "model": "qwen3.8-27b-normal",
+  "context": 131200,
+  "pool": 131328,
+  "dflash_block": 8,
+  "aot_count": 9,
+  "kda_hash_ok": true,
+  "power_limit_W": 460.0,
+  "pi_smoke_tool_roundtrip": true,
+  "pi_smoke_thinking_chars": 348,
+  "stop_start_cycle": [
+    "pi-serving-059:STOPPED SIGTERM",
+    "managed:READY",
+    "managed:HEALTHY"
+  ]
+}

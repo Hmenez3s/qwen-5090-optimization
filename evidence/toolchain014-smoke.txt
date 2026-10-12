@@ -1,0 +1,6 @@
+{"command": ["/home/operator/qwen38-5090/optimization-runs/ninfer-build-014/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc", "--version"], "exit": 0, "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Tue_Dec_16_07:23:41_PM_PST_2025\nCuda compilation tools, release 13.1, V13.1.115\nBuild cuda_13.1.r13.1/compiler.37061995_0\n", "stderr": ""}
+{"command": ["/home/operator/qwen38-5090/optimization-runs/ninfer-build-014/venv/bin/cmake", "--version"], "exit": 0, "stdout": "cmake version 3.31.10\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n", "stderr": ""}
+{"command": ["/home/operator/qwen38-5090/optimization-runs/ninfer-build-014/venv/bin/ninja", "--version"], "exit": 0, "stdout": "1.13.2.git.kitware.jobserver-pipe-1\n", "stderr": ""}
+{"command": ["/home/operator/qwen38-5090/optimization-runs/ninfer-build-014/sysroot/usr/bin/pkgconf", "--modversion", "libavformat", "libavcodec", "libavutil", "libswscale", "libcurl"], "exit": 0, "stdout": "60.16.100\n60.31.102\n58.29.100\n7.5.100\n8.5.0\n", "stderr": ""}
+CUDA_LIBS ['libcudart.so.13', 'libnvvm.so.4', 'cmake', 'libnvtx3interop.so.1', 'libcudadevrt.a', 'libcudart_static.a']
+NVTX3 True

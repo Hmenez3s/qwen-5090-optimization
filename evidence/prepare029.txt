@@ -1,0 +1,1 @@
+{"status": "PREPARED", "roots": ["/home/operator/qwen38-5090/optimization-runs/micro029", "/home/operator/qwen38-5090/optimization-runs/pi-serving-030"], "reference_pid": 385, "cache_copy_bytes_per_root": 26089868, "protected_cache_unchanged": true}

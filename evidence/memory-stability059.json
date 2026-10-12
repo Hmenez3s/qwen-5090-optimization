@@ -1,0 +1,1 @@
+{"status": "PASS", "pid": 5828, "elapsed": 125.05652441299935, "before": {"used_MiB": 31032.0, "free_MiB": 1156.0, "power_limit_W": 460.0}, "after": {"used_MiB": 31029.0, "free_MiB": 1159.0, "power_limit_W": 460.0}, "growth_limit_MiB": 64}

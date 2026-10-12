@@ -1,0 +1,189 @@
+{
+  "sgl_kernel_top": [
+    {
+      "name": "gemm.py",
+      "directory": false,
+      "bytes": 3018
+    },
+    {
+      "name": "spatial_ops.abi3.so",
+      "directory": false,
+      "bytes": 81576
+    },
+    {
+      "name": "testing",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "allreduce.py",
+      "directory": false,
+      "bytes": 4381
+    },
+    {
+      "name": "sm90",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "test_utils.py",
+      "directory": false,
+      "bytes": 4110
+    },
+    {
+      "name": "speculative.py",
+      "directory": false,
+      "bytes": 7676
+    },
+    {
+      "name": "flash_attn.py",
+      "directory": false,
+      "bytes": 16160
+    },
+    {
+      "name": "expert_specialization.py",
+      "directory": false,
+      "bytes": 1118
+    },
+    {
+      "name": "__pycache__",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "utils.py",
+      "directory": false,
+      "bytes": 1984
+    },
+    {
+      "name": "kvcacheio.py",
+      "directory": false,
+      "bytes": 7347
+    },
+    {
+      "name": "flash_ops.abi3.so",
+      "directory": false,
+      "bytes": 1122615224
+    },
+    {
+      "name": "load_utils.py",
+      "directory": false,
+      "bytes": 9358
+    },
+    {
+      "name": "__init__.py",
+      "directory": false,
+      "bytes": 7240
+    },
+    {
+      "name": "grammar.py",
+      "directory": false,
+      "bytes": 492
+    },
+    {
+      "name": "sparse_flash_attn.py",
+      "directory": false,
+      "bytes": 10410
+    },
+    {
+      "name": "scalar_type.py",
+      "directory": false,
+      "bytes": 12383
+    },
+    {
+      "name": "sm100",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "cutlass_moe.py",
+      "directory": false,
+      "bytes": 3997
+    },
+    {
+      "name": "flash_mla.py",
+      "directory": false,
+      "bytes": 12551
+    },
+    {
+      "name": "top_k.py",
+      "directory": false,
+      "bytes": 6292
+    },
+    {
+      "name": "elementwise.py",
+      "directory": false,
+      "bytes": 13848
+    },
+    {
+      "name": "flashmla_ops.abi3.so",
+      "directory": false,
+      "bytes": 9090800
+    },
+    {
+      "name": "infllm_v2",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "memory.py",
+      "directory": false,
+      "bytes": 180
+    },
+    {
+      "name": "debug_utils.py",
+      "directory": false,
+      "bytes": 1137
+    },
+    {
+      "name": "quantization",
+      "directory": true,
+      "bytes": 4096
+    },
+    {
+      "name": "sampling.py",
+      "directory": false,
+      "bytes": 3937
+    },
+    {
+      "name": "spatial.py",
+      "directory": false,
+      "bytes": 1808
+    },
+    {
+      "name": "mamba.py",
+      "directory": false,
+      "bytes": 2601
+    },
+    {
+      "name": "musa.py",
+      "directory": false,
+      "bytes": 10015
+    },
+    {
+      "name": "version.py",
+      "directory": false,
+      "bytes": 28
+    },
+    {
+      "name": "infllm_ops.cpython-310-x86_64-linux-gnu.so",
+      "directory": false,
+      "bytes": 29411464
+    },
+    {
+      "name": "attention.py",
+      "directory": false,
+      "bytes": 3726
+    },
+    {
+      "name": "metal.py",
+      "directory": false,
+      "bytes": 3994
+    },
+    {
+      "name": "moe.py",
+      "directory": false,
+      "bytes": 5087
+    }
+  ]
+}

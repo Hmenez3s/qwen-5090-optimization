@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "model": "qwen3.8-27b-normal",
+  "context_length": 131200,
+  "max_total_num_tokens": 131328
+}

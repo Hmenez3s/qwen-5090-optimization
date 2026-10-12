@@ -1,0 +1,25 @@
+{
+  "started_monotonic": 9467.045179291,
+  "steps": [
+    {
+      "name": "quality-final",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "quality-needles",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "performance",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "status": "PASS",
+  "elapsed": 309.21461118599836
+}

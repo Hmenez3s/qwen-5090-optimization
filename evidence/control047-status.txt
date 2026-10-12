@@ -1,0 +1,2 @@
+{"root": "exp047-control", "suite": "performance", "exit": 0, "stderr": ""}
+{"status": "PASS", "root": "exp047-control", "suite": "performance", "cases": 27}

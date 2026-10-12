@@ -1,0 +1,5 @@
+PROCESS 5009 /home/operator/.venvs/qwen38/bin/python -m sglang.launch_server --model-path /home/operator/qwen38-5090/models/Qwen3.8-27B-NVFP4-LMHead4 --served-model-name qwen-normal-exp012 --host 127.0.0.1 --port 3473
+EXIT 1 benchmark failed: OpenAI delta.reasoning_content must be a string
+
+{"record_type": "preflight", "status": "ok", "protocol": "openai", "expected_model": "qwen-normal-exp012", "served_models": ["qwen-normal-exp012"]}
+{"record_type": "case", "status": "error", "case": "openai-wire-smoke", "repetition": 1, "expected_model": "qwen-normal-exp012", "protocol": "openai", "request_sha256": "b0fcc9dabca7679f768f23d8cc10ca73d5e5b166afa8e472a0c160cce01d8a48", "text": null, "meta": null, "error": "OpenAI delta.reasoning_content must be a string"}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "job": {
+    "stage": "COMPLETE",
+    "micro_exit": 0,
+    "elapsed": 3.1272849380000025
+  },
+  "protected_cache_unchanged": true,
+  "kda_hash": "b14c3eaa6b8d9d62b559a50be62fe4cad935e7172bdb79d18a1f6abcb4ccb7c5",
+  "gpu_free_MiB": 29838.0,
+  "power_limit_W": 460.0
+}

@@ -1,0 +1,4 @@
+quality-final 0  
+quality-needles 0  
+performance 0  
+{"status": "PASS", "quality_records": 16, "needles": 3, "performance": 27, "elapsed": 309.21461118599836}

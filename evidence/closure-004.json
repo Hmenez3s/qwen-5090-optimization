@@ -1,0 +1,126 @@
+{
+  "/home/operator/.venvs/qwen38/lib/python3.12/site-packages/sglang/srt/utils/common.py:2273": "def kill_process_tree(\n    parent_pid,\n    include_parent: bool = True,\n    skip_pid: int = None,\n    wait_timeout: Optional[float] = 60,\n):\n    \"\"\"Kill the process and all its child processes.\n\n    `wait_timeout` (seconds) blocks until every killed process is reaped and\n    raises `RuntimeError` on timeout. SIGKILL only queues the teardown, so\n    returning without waiting leaves the GPU context, the pinned host memory\n    and the ports held for seconds; pass `None` only where blocking is\n    unacceptable, such as a `__del__`. The `parent_pid == os.getpid()` branch\n    calls `sys.exit(0)` and cannot wait for itself -- use\n    `include_parent=False` if child reap must finish first.\n    \"\"\"\n    logger.info(\n        f\"kill_process_tree called: parent_pid={parent_pid}, \"\n        f\"include_parent={include_parent}, pid={os.getpid()}\"\n    )\n\n    if parent_pid is None:\n        parent_pid = os.getpid()\n        include_parent = False\n\n    try:\n        itself = psutil.Process(parent_pid)\n        children = itself.children(recursive=True)\n    except psutil.NoSuchProcess:\n        return\n\n    killed = []\n    for child in children:\n        if child.pid == skip_pid:\n            continue\n        try:\n            child.kill()\n            killed.append(child)\n        except psutil.NoSuchProcess:\n            pass\n\n    if include_parent:\n        try:\n            if parent_pid == os.getpid():\n                itself.kill()\n                sys.exit(0)\n\n            itself.kill()\n\n            # Sometime processes cannot be killed with SIGKILL (e.g, PID=1 launched by kubernetes),\n            # so we send an additional signal to kill them.\n            itself.send_signal(signal.SIGQUIT)\n            killed.append(itself)\n        except psutil.NoSuchProcess:\n            pass\n\n    if wait_timeout is not None and killed:\n        _wait_for_reap_or_raise(killed, wait_timeout)",
+  "/home/operator/.venvs/qwen38/lib/python3.12/site-packages/sglang/srt/speculative/dflash_utils.py:71": "def is_dflash_sampling_verify_available() -> bool:\n    return _DFLASH_SAMPLING_VERIFY_AVAILABLE",
+  "loader_files": [
+    "auto_loader.py",
+    "deepseek4_gguf.py",
+    "kimi_k3_gguf.py",
+    "utils.py",
+    "expert_pack_runtime.py",
+    "checkpoint_quantization.py",
+    "gguf_name_maps.py",
+    "remote_instance_weight_loader_utils.py",
+    "__init__.py",
+    "expert_pack_config.py",
+    "post_load.py",
+    "loader.py",
+    "weight_utils.py",
+    "expert_pack_loader.py",
+    "ci_weight_validation.py"
+  ],
+  "loader_snippets": [
+    {
+      "line": 110,
+      "context": "from sglang.srt.model_loader.weight_utils import (\n    CheckpointFilePrefetchHandle,\n    _prefetch_all_checkpoints,\n    buffered_multi_thread_safetensors_weights_iterator,\n    download_safetensors_index_file_from_hf,\n    download_weights_from_hf,\n    fastsafetensors_weights_iterator,\n    filter_duplicate_safetensors_files,\n    filter_files_not_needed_for_inference,\n    get_gguf_extra_tensor_names,\n    get_quant_config,\n    gguf_quant_weights_iterator,\n    initialize_capture_safe_weights,\n    initialize_dummy_weights,\n    maybe_add_mtp_safetensors,\n    multi_thread_pt_weights_iterator,\n    np_cache_weights_iterator,"
+    },
+    {
+      "line": 433,
+      "context": "        not downloaded from ModelScope.\"\"\"\n        if get_bool_env_var(\"SGLANG_USE_MODELSCOPE\"):\n            # download model from ModelScope hub,\n            # lazy import so that modelscope is not required for normal use.\n            # pylint: disable=C.\n            from modelscope.hub.snapshot_download import snapshot_download\n\n            if not os.path.exists(model):\n                model_path = snapshot_download(\n                    model_id=model,\n                    cache_dir=self.load_config.download_dir,\n                    local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,\n                    revision=revision,\n                    ignore_file_pattern=self.load_config.ignore_patterns,\n                )\n            else:\n                model_path = model"
+    },
+    {
+      "line": 436,
+      "context": "            # lazy import so that modelscope is not required for normal use.\n            # pylint: disable=C.\n            from modelscope.hub.snapshot_download import snapshot_download\n\n            if not os.path.exists(model):\n                model_path = snapshot_download(\n                    model_id=model,\n                    cache_dir=self.load_config.download_dir,\n                    local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,\n                    revision=revision,\n                    ignore_file_pattern=self.load_config.ignore_patterns,\n                )\n            else:\n                model_path = model\n            return model_path\n        return model\n"
+    },
+    {
+      "line": 439,
+      "context": "\n            if not os.path.exists(model):\n                model_path = snapshot_download(\n                    model_id=model,\n                    cache_dir=self.load_config.download_dir,\n                    local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,\n                    revision=revision,\n                    ignore_file_pattern=self.load_config.ignore_patterns,\n                )\n            else:\n                model_path = model\n            return model_path\n        return model\n\n    def _prepare_weights(\n        self,\n        model_name_or_path: str,"
+    },
+    {
+      "line": 462,
+      "context": "        If the model is not local, it will be downloaded.\"\"\"\n        model_name_or_path = self._maybe_download_from_modelscope(\n            model_name_or_path, revision\n        )\n\n        is_local = os.path.isdir(model_name_or_path)\n        load_format = self.load_config.load_format\n        use_safetensors = False\n        index_file = SAFE_WEIGHTS_INDEX_NAME\n        # Some quantized models use .pt files for storing the weights.\n        if load_format == LoadFormat.AUTO:\n            allow_patterns = [\"*.safetensors\", \"*.bin\"]\n        elif (\n            load_format == LoadFormat.SAFETENSORS\n            or load_format == LoadFormat.FASTSAFETENSORS\n        ):\n            use_safetensors = True"
+    },
+    {
+      "line": 496,
+      "context": "            allow_patterns += [\"*.pt\"]\n\n        if allow_patterns_overrides is not None:\n            allow_patterns = allow_patterns_overrides\n\n        if not is_local:\n            hf_folder = download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                allow_patterns,\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n        else:\n            hf_folder = model_name_or_path\n\n        server_args = get_server_args()"
+    },
+    {
+      "line": 497,
+      "context": "\n        if allow_patterns_overrides is not None:\n            allow_patterns = allow_patterns_overrides\n\n        if not is_local:\n            hf_folder = download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                allow_patterns,\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n        else:\n            hf_folder = model_name_or_path\n\n        server_args = get_server_args()\n        if server_args and get_model().model_checksum is not None:"
+    },
+    {
+      "line": 528,
+      "context": "            # For models like Mistral-7B-Instruct-v0.3\n            # there are both sharded safetensors files and a consolidated\n            # safetensors file. Using both breaks.\n            # Here, we download the `model.safetensors.index.json` and filter\n            # any files not found in the index.\n            if not is_local:\n                download_safetensors_index_file_from_hf(\n                    model_name_or_path,\n                    index_file,\n                    self.load_config.download_dir,\n                    revision,\n                )\n            hf_weights_files = filter_duplicate_safetensors_files(\n                hf_weights_files,\n                hf_folder,\n                index_file,\n                allow_patterns=("
+    },
+    {
+      "line": 894,
+      "context": "\n        try:\n            hf_config = AutoConfig.from_pretrained(\n                model_config.model_path,\n                trust_remote_code=True,\n                local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,\n            )\n        except (KeyError, ValueError):\n            from sglang.srt.utils.hf_transformers_utils import get_config\n\n            hf_config = get_config(\n                model_config.model_path,\n                trust_remote_code=True,\n            )\n        with init_empty_weights():\n            torch_dtype = getattr(hf_config, \"torch_dtype\", torch.float16)\n            model = AutoModelForCausalLM.from_config("
+    },
+    {
+      "line": 935,
+      "context": "            model_config.model_path,\n            config=hf_config,\n            device_map=device_map,\n            **model_kwargs,\n            trust_remote_code=True,\n            local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,\n        )\n        # Handle both legacy modelopt_quant and unified quantization flags\n        if hasattr(model_config, \"modelopt_quant\") and model_config.modelopt_quant:\n            # Legacy approach\n            quant_choice_str = model_config.modelopt_quant\n            rank0_log(f\"ModelOpt quantization requested (legacy): {quant_choice_str}\")\n        else:\n            # Unified approach - extract quantization type\n            quant_choice_str = model_config._get_modelopt_quant_type()\n            rank0_log(\n                f\"ModelOpt quantization requested (unified): {model_config.quantization} -> {quant_choice_str}\""
+    },
+    {
+      "line": 1719,
+      "context": "                else:\n                    result[k] = t\n        return result\n\n    def _prepare_weights(self, model_name_or_path: str, revision: Optional[str]):\n        if os.path.isdir(model_name_or_path):\n            return model_name_or_path\n        else:\n            allow_patterns = [\"*.safetensors\"]\n            return download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                allow_patterns,\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n"
+    },
+    {
+      "line": 1723,
+      "context": "    def _prepare_weights(self, model_name_or_path: str, revision: Optional[str]):\n        if os.path.isdir(model_name_or_path):\n            return model_name_or_path\n        else:\n            allow_patterns = [\"*.safetensors\"]\n            return download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                allow_patterns,\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n\n    def download_model(self, model_config: ModelConfig) -> None:\n        self._prepare_weights(model_config.model_path, model_config.revision)\n\n    def load_model("
+    },
+    {
+      "line": 2715,
+      "context": "        with open(config_file_path, \"r\") as f:\n            config = json.load(f)\n            self.target_modules = config[\"target_modules\"]\n\n    def _get_config_file(self, qlora_adapter: str) -> str:\n        is_local = os.path.isdir(qlora_adapter)\n        config_file_path = None\n        if is_local:\n            for file in self.possible_config_file_names:\n                config_file_path = os.path.join(qlora_adapter, file)\n                if os.path.exists(config_file_path):\n                    break\n        else:\n            hf_api = HfApi()\n            repo_files = hf_api.list_repo_files(repo_id=qlora_adapter)\n            for file in self.possible_config_file_names:\n                if file in repo_files:"
+    },
+    {
+      "line": 2717,
+      "context": "            self.target_modules = config[\"target_modules\"]\n\n    def _get_config_file(self, qlora_adapter: str) -> str:\n        is_local = os.path.isdir(qlora_adapter)\n        config_file_path = None\n        if is_local:\n            for file in self.possible_config_file_names:\n                config_file_path = os.path.join(qlora_adapter, file)\n                if os.path.exists(config_file_path):\n                    break\n        else:\n            hf_api = HfApi()\n            repo_files = hf_api.list_repo_files(repo_id=qlora_adapter)\n            for file in self.possible_config_file_names:\n                if file in repo_files:\n                    config_file_path = hf_hub_download(\n                        repo_id=qlora_adapter, filename=file"
+    },
+    {
+      "line": 2746,
+      "context": "        revision: Optional[str] = None,\n    ) -> Tuple[List[str], str]:\n        \"\"\"Retrieve weight files. Download the files if necessary.\n\n        Return the weight files and the file pattern.\"\"\"\n        is_local = os.path.isdir(model_name_or_path)\n\n        if is_local:\n            for pattern in allowed_patterns:\n                weight_files = glob.glob(os.path.join(model_name_or_path, pattern))\n                if weight_files:\n                    return weight_files, pattern\n        else:\n            hf_api = HfApi()\n            repo_files = hf_api.list_repo_files(repo_id=model_name_or_path)\n            for pattern in allowed_patterns:\n                matching_files = fnmatch.filter(repo_files, pattern)"
+    },
+    {
+      "line": 2748,
+      "context": "        \"\"\"Retrieve weight files. Download the files if necessary.\n\n        Return the weight files and the file pattern.\"\"\"\n        is_local = os.path.isdir(model_name_or_path)\n\n        if is_local:\n            for pattern in allowed_patterns:\n                weight_files = glob.glob(os.path.join(model_name_or_path, pattern))\n                if weight_files:\n                    return weight_files, pattern\n        else:\n            hf_api = HfApi()\n            repo_files = hf_api.list_repo_files(repo_id=model_name_or_path)\n            for pattern in allowed_patterns:\n                matching_files = fnmatch.filter(repo_files, pattern)\n                if matching_files:\n                    hf_folder = download_weights_from_hf("
+    },
+    {
+      "line": 2759,
+      "context": "            hf_api = HfApi()\n            repo_files = hf_api.list_repo_files(repo_id=model_name_or_path)\n            for pattern in allowed_patterns:\n                matching_files = fnmatch.filter(repo_files, pattern)\n                if matching_files:\n                    hf_folder = download_weights_from_hf(\n                        model_name_or_path,\n                        self.load_config.download_dir,\n                        [pattern],\n                        revision,\n                        ignore_patterns=self.load_config.ignore_patterns,\n                    )\n                    return glob.glob(os.path.join(hf_folder, pattern)), pattern\n\n        raise RuntimeError(f\"No model weights found in: `{model_name_or_path}`\")\n\n    def _prepare_weights("
+    },
+    {
+      "line": 4119,
+      "context": "        from sglang.srt.utils.runai_utils import is_runai_obj_uri, list_safetensors\n\n        is_object_storage_path = is_runai_obj_uri(model_name_or_path)\n        if self._is_distributed is None:\n            self._is_distributed = is_object_storage_path\n        is_local = os.path.isdir(model_name_or_path)\n        safetensors_pattern = \"*.safetensors\"\n        index_file = SAFE_WEIGHTS_INDEX_NAME\n\n        hf_folder = (\n            model_name_or_path\n            if (is_local or is_object_storage_path)\n            else download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                [safetensors_pattern],\n                revision,"
+    },
+    {
+      "line": 4125,
+      "context": "        safetensors_pattern = \"*.safetensors\"\n        index_file = SAFE_WEIGHTS_INDEX_NAME\n\n        hf_folder = (\n            model_name_or_path\n            if (is_local or is_object_storage_path)\n            else download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                [safetensors_pattern],\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n        )\n\n        server_args = get_server_args()\n        if server_args and get_model().model_checksum is not None:"
+    },
+    {
+      "line": 4126,
+      "context": "        index_file = SAFE_WEIGHTS_INDEX_NAME\n\n        hf_folder = (\n            model_name_or_path\n            if (is_local or is_object_storage_path)\n            else download_weights_from_hf(\n                model_name_or_path,\n                self.load_config.download_dir,\n                [safetensors_pattern],\n                revision,\n                ignore_patterns=self.load_config.ignore_patterns,\n            )\n        )\n\n        server_args = get_server_args()\n        if server_args and get_model().model_checksum is not None:\n            from sglang.srt.utils.model_file_verifier import verify"
+    },
+    {
+      "line": 4149,
+      "context": "        # For models like Mistral-7B-Instruct-v0.3\n        # there are both sharded safetensors files and a consolidated\n        # safetensors file. Using both breaks.\n        # Here, we download the `model.safetensors.index.json` and filter\n        # any files not found in the index.\n        if not is_local and not is_object_storage_path:\n            download_safetensors_index_file_from_hf(\n                model_name_or_path,\n                index_file,\n                self.load_config.download_dir,\n                revision,\n            )\n        hf_weights_files = filter_duplicate_safetensors_files(\n            hf_weights_files, hf_folder, index_file\n        )\n\n        if len(hf_weights_files) == 0:"
+    }
+  ],
+  "safe_flags": {
+    "delete_ckpt_after_loading": false,
+    "model_loader_extra_config": "{}",
+    "trust_remote_code": false,
+    "custom_weight_loader": [],
+    "modelopt_export_path": null,
+    "modelopt_checkpoint_save_path": null,
+    "quantize_and_serve": false,
+    "weight_loader_drop_cache_after_load": false,
+    "load_format": "auto",
+    "download_dir": null,
+    "enable_lora": null,
+    "enable_prefix_mm_cache": false,
+    "kv_events_config": null,
+    "hicache_storage_backend": null,
+    "remote_instance_weight_loader_seed_instance_ip": null,
+    "file_storage_path": "sglang_storage",
+    "crash_dump_folder": null
+  }
+}

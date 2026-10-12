@@ -1,0 +1,1 @@
+{"status": "PASS", "age_seconds": 479.64000000000306, "idle": true, "template_launch_sha256": "db3cac58ff894174d4d4eb60a3116ccfa3cb053890598d1107467562a7e651bf", "template_hook_sha256": "11b5044ade78146217fa9610ba9ceb30e4b7b3c666413aeccf155940ce3b1d27", "active_root": "/home/operator/qwen38-5090/optimization-runs/qwenctl-20260910T012754Z-a3c64c11", "pid": 6820}

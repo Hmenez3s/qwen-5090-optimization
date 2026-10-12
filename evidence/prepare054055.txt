@@ -1,0 +1,1 @@
+{"status": "PREPARED", "roots": ["/home/operator/qwen38-5090/optimization-runs/exp054-final-validation", "/home/operator/qwen38-5090/optimization-runs/pi-serving-055"], "wait_for_pid": 3910, "protected_cache_unchanged": true}

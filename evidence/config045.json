@@ -1,0 +1,16 @@
+{
+  "status": "ready",
+  "served_model_name": "qwen-normal-exp045",
+  "context_length": 131200,
+  "max_total_num_tokens": 131328,
+  "attention_backend": "flashinfer",
+  "decode_attention_backend": "triton",
+  "prefill_attention_backend": null,
+  "speculative_attention_mode": "decode",
+  "speculative_draft_attention_backend": "flashinfer",
+  "speculative_dflash_block_size": 8,
+  "speculative_accept_threshold_single": 1.0,
+  "speculative_accept_threshold_acc": 1.0,
+  "page_size": 1,
+  "triton_attention_num_kv_splits": 8
+}
