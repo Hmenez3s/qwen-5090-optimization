@@ -2,7 +2,7 @@
 
 Historical research on serving **Qwen3.8-27B NVFP4** with **SGLang, FlashInfer and DFlash2** on one **RTX 5090 (32 GB)**. Includes the optimization notebook, experimental scripts, recorded benchmarks, the final selective-KDA hook and Windows/WSL controller source.
 
-> **Publication draft.** This is an anonymized research archive, not a portable installer or a claim about a currently running service. No GPU benchmarks were rerun while preparing this archive. The model/version labels and package versions below are those recorded in the original experiments.
+> **Research archive.** This is an anonymized research archive, not a portable installer or a claim about a currently running service. No GPU benchmarks were rerun while preparing this archive. The model/version labels and package versions below are those recorded in the original experiments.
 
 ## What the optimization actually changes
 
@@ -59,7 +59,7 @@ The original working directory was preserved. Only a separate export was anonymi
 
 Private PI sessions, Git metadata, caches, binaries, compressed raw archives, binary profiler captures and third-party source/install trees are excluded. Exclusions do not delete any original research material. Upstream kernels, frameworks and model artifacts are separate works and retain their own licenses; an MIT license for original research code must not be read as relicensing them.
 
-See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for provenance and licensing boundaries. Public repository creation and the proposed MIT license for original research code remain pending user approval.
+See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for provenance and licensing boundaries. Original research code and documentation are available under the [MIT License](LICENSE). Upstream implementations, copied excerpts, tools and model artifacts retain their own licenses; see the notices before redistributing them.
 
 ## Export checks
 

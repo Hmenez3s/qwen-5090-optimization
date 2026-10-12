@@ -1,5 +1,5 @@
 {
-  "status": "PRIVATE_DRAFT_NOT_APPROVED_FOR_PUBLICATION",
+  "status": "PUBLICATION_APPROVED",
   "source_unchanged": true,
   "included_files": [
     {
@@ -3817,5 +3817,11 @@
     "controller_python": "PASS; 10 unittest tests; run-owned fixtures; 1 worker; 0.130 s test runtime",
     "gpu_reproduction": "NOT_RUN; historical recorded results only",
     "protected_resource_boundary": "No SSH, WSL, GPU, service, model, installer, GitHub publication or original source mutation; no cleanup of existing resources"
+  },
+  "publication": {
+    "repository": "Hmenez3s/qwen-5090-optimization",
+    "visibility": "public",
+    "license": "MIT for original research code and documentation only; third-party works retain their own terms",
+    "authorization": "User explicitly approved publication after the repository, public visibility and MIT proposal were named."
   }
 }

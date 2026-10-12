@@ -1,6 +1,6 @@
 # Provenance and third-party boundaries
 
-This archive contains research instrumentation, process-local hooks and historical experiment records. It does **not** claim authorship of upstream GPU kernels. A license chosen for original research code does not replace the licenses of imported implementations, model artifacts, copied excerpts or third-party tools.
+This archive contains research instrumentation, process-local hooks and historical experiment records. It does **not** claim authorship of upstream GPU kernels. The MIT license in `LICENSE` applies to original research code and documentation only. It does not replace the licenses of imported implementations, model artifacts, copied excerpts or third-party tools. An Apache-2.0 license copy is provided in [`licenses/Apache-2.0.txt`](licenses/Apache-2.0.txt) for the historical SGLang/FlashInfer source excerpts identified here.
 
 ## Recorded upstream references
 
