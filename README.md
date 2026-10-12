@@ -1,6 +1,8 @@
-# Qwen 27B · RTX 5090 optimization research
+# Qwen 27B · 300+ tok/s on one RTX 5090
 
-Historical research on serving **Qwen3.8-27B NVFP4** with **SGLang, FlashInfer and DFlash2** on one **RTX 5090 (32 GB)**. Includes the optimization notebook, experimental scripts, recorded benchmarks, the final selective-KDA hook and Windows/WSL controller source.
+**303.14 tok/s median estimated streaming throughput** in the short coding benchmark: **2,086 input tokens, 1,024 output tokens, three repetitions**, on one **RTX 5090 (32 GB)**. The fastest recorded run in the final candidate suite was **346.93 tok/s** by the same estimate. Including initial waiting and the complete request, the coding case's **median end-to-end throughput was 261.31 tok/s**. These are scenario-specific results, not a 300+ tok/s guarantee for every task or context length. [Recorded evidence](evidence/performance048.jsonl).
+
+Historical research on serving **Qwen3.8-27B NVFP4** with **SGLang, FlashInfer and DFlash2**. Includes the optimization notebook, experimental scripts, recorded benchmarks, the final selective-KDA hook and Windows/WSL controller source.
 
 > **Research archive.** This is an anonymized research archive, not a portable installer or a claim about a currently running service. No GPU benchmarks were rerun while preparing this archive. The model/version labels and package versions below are those recorded in the original experiments.
 
@@ -15,16 +17,36 @@ The final hook in [`scripts/sitecustomize-kda059.py`](scripts/sitecustomize-kda0
 
 It uses existing upstream kernels, rather than claiming a new GEMM implementation. It checks the installed KDA source hash, loads verified FlashInfer AOT libraries and fails closed if the expected root or eligibility changes. The archive also contains unsuccessful experiments and alternatives; these are research records, **not recommendations to enable every patch**. In particular, the experimental positive-`min_p` path was not promoted to the final configuration.
 
-## Recorded results
+## Recorded throughput
+
+The final KDA2 candidate (`048`) completed **27/27 requests**, each with **1,024 output tokens**. Every throughput value below is the **median of three repetitions**; input counts are the API-reported counts, including prompt/template overhead.
+
+| Task | Input tokens | Streaming estimate (tok/s) | End-to-end (tok/s) |
+| --- | ---: | ---: | ---: |
+| **Code** | **2,086** | **303.14** | **261.31** |
+| Math | 2,085 | 232.24 | 225.84 |
+| Prose | 2,086 | 167.67 | 163.20 |
+| Code | 32,806 | 235.47 | 227.72 |
+| Math | 32,805 | 232.05 | 223.67 |
+| Prose | 32,806 | 143.96 | 140.11 |
+| Code | 130,086 | 228.35 | 218.65 |
+| Math | 130,086 | 181.30 | 174.01 |
+| Prose | 130,086 | 127.01 | 123.93 |
+
+**What these numbers mean:** `stream_tokens_per_second_estimate` divides API-reported completion tokens by the first-to-last nonempty content/reasoning chunk interval. It excludes initial waiting and can have first-chunk/hidden-token bias. The OpenAI stream did not expose per-chunk token counters, so the native `decode_tokens_per_second` field is **null**: **303.14 tok/s is a streaming estimate, not an instrumented GPU decode rate**. `e2e_tokens_per_second` includes the complete request duration, including initial waiting and the final usage-only delay. These medians cover three repetitions, not a cold-start-only benchmark; cache state was not exposed in the OpenAI usage records. The recorded generation settings were temperature `0`, top-p `1` and max output `1024`.
+
+Source: [`performance048.jsonl`](evidence/performance048.jsonl), including its `metrics`, `metric_notes`, `usage` and `declared_settings` fields.
+
+### Improvement against neighboring controls
 
 The final candidate won all nine scenarios against controls measured immediately before and after it:
 
-| Comparison | Geometric-mean improvement | Scenarios improved |
+| Comparison | Geometric-mean streaming improvement | Scenarios improved |
 | --- | --- | --- |
 | Previous control | **+1.7421%** | 9/9 |
 | Subsequent control | **+2.7542%** | 9/9 |
 
-Evidence: [`pair047048-summary.json`](evidence/pair047048-summary.json), [`pair047048050-summary.json`](evidence/pair047048050-summary.json), [`performance048.jsonl`](evidence/performance048.jsonl). These are end-to-end results for this particular setup, not general speed guarantees or GPU-microbenchmark speedups.
+Evidence: [`pair047048-summary.json`](evidence/pair047048-summary.json), [`pair047048050-summary.json`](evidence/pair047048050-summary.json). These comparisons use per-scenario medians of the streaming estimate, not full-request end-to-end throughput or GPU-microbenchmark speedups.
 
 The original final runbook records 27 performance cases with 1,024 output tokens, a 131,110-token context test, 3/3 exact needle responses, quality/tool-use checks and seeded sampling checks. Consult the actual evidence and protocol before extrapolating.
 
